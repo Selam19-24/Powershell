@@ -1,261 +1,208 @@
-<div align="center">
-  
-# 🔷 PowerShell Kapsamlı Başvuru Kılavuzu 🔷
+PowerShell için GitHub'da paylaşabileceğiniz kapsamlı ve akademik bir hızlı referans rehberi aşağıdaki gibidir. Bu rehber, Markdown formatında yazılmıştır ve `readme.md` dosyasına uygun bir tasarımda düzenlenmiştir.
 
-[![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white)](https://github.com/PowerShell/PowerShell)
-[![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://docs.microsoft.com/powershell/)
-[![VSCode](https://img.shields.io/badge/VS_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)](https://code.visualstudio.com/)
+```markdown
+# PowerShell Hızlı Referans Rehberi
 
-### 🚀 Kapsamlı PowerShell Öğrenme ve Başvuru Rehberi
-*En güncel PowerShell komutları, best practice'ler ve ipuçları*
+Bu rehber, PowerShell kullanımı için temel ve ileri düzey komutları kapsayan hızlı bir referans sunmaktadır. PowerShell, komut satırı arayüzü ve betik dili olarak Windows, macOS ve Linux sistemlerinde kullanılabilir. Rehberde temel kullanım örneklerinden, değişken yönetimine, komut dizilerine ve daha birçok konuya değinilecektir.
 
--------------------
+## İçindekiler
+1. [PowerShell'e Giriş](#powershelle-giriş)
+2. [Temel Komutlar](#temel-komutlar)
+3. [Değişkenler](#değişkenler)
+4. [Nesne Tabanlı Yapı](#nesne-tabanlı-yapı)
+5. [Koşullu İfadeler](#koşullu-ifadeler)
+6. [Döngüler](#döngüler)
+7. [Fonksiyonlar](#fonksiyonlar)
+8. [Modüller ve Cmdlet'ler](#modüller-ve-cmdletler)
+9. [Hata Yönetimi](#hata-yonetimi)
+10. [Gelişmiş Konular](#gelişmiş-konular)
+11. [Kaynaklar](#kaynaklar)
 
-</div>
+---
 
-## 📑 İçindekiler
+## PowerShell'e Giriş
 
-<div align="center">
+PowerShell, .NET framework üzerine inşa edilmiş nesne tabanlı bir komut satırı aracıdır. Hem sistem yöneticilerine hem de geliştiricilere esneklik sağlayarak, otomasyon işlemlerinde sıklıkla kullanılır.
 
-| Temel Konular | Orta Seviye | İleri Seviye |
-|:-------------:|:-----------:|:-------------:|
-| [🔰 Giriş](#giriş-ve-temel-bilgiler) | [📂 Dosya İşlemleri](#dosya-ve-dizin-işlemleri) | [🔐 Güvenlik](#güvenlik-ve-erişim) |
-| [⌨️ Terminal](#powershell-ise-ve-terminal) | [⚙️ Sistem Yönetimi](#sistem-yönetimi) | [🌐 Remoting](#powershell-remoting) |
-| [📌 Temel Komutlar](#temel-komutlar-ve-kavramlar) | [🌍 Ağ Yönetimi](#ağ-yönetimi) | [🔄 DSC](#ileri-seviye-konular) |
-| [📊 Veri Tipleri](#değişkenler-ve-veri-tipleri) | [📊 Veritabanı](#powershell-ile-veritabanı-işlemleri) | [☁️ Azure](#powershell-ve-azure) |
+PowerShell'i başlatmak için:
+```bash
+# Windows
+powershell
 
-</div>
-
--------------------
-
-## 🎯 Hızlı Başlangıç
-
-<div align="center">
-
-```mermaid
-graph LR
-    A[Başlangıç] --> B[Temel Komutlar]
-    B --> C[Scripting]
-    C --> D[Otomasyon]
-    style A fill:#ff9900
-    style B fill:#87CEEB
-    style C fill:#90EE90
-    style D fill:#FFB6C1
+# macOS / Linux
+pwsh
 ```
 
-</div>
+## Temel Komutlar
 
-## 🔰 Giriş ve Temel Bilgiler
-
-<table>
-<tr>
-<th width="50%">Temel Kavramlar</th>
-<th width="50%">Örnekler</th>
-</tr>
-<tr>
-<td>
-
-### 📌 PowerShell Nedir?
-- Nesne tabanlı otomasyon platformu
-- .NET Framework temelli
-- Cross-platform desteği
-- Güçlü scripting özellikleri
-
-</td>
-<td>
+PowerShell'de sık kullanılan temel komutlar:
 
 ```powershell
-# Sürüm kontrolü
-$PSVersionTable
+# Dosya Listesi
+Get-ChildItem
 
-# Çalışma ortamı
-Get-ExecutionPolicy
-Set-ExecutionPolicy RemoteSigned
-```
+# İçerik Okuma
+Get-Content
 
-</td>
-</tr>
-</table>
+# Yardım Almak
+Get-Help <komut>
 
-## ⚡ Temel Komutlar ve Kavramlar
-
-<div align="center">
-
-| Komut Kategorisi | 📝 Açıklama | ⌨️ Örnek |
-|-----------------|------------|---------|
-| **Get** Komutları | Bilgi alma | `Get-Process` |
-| **Set** Komutları | Değer atama | `Set-Location` |
-| **New** Komutları | Yeni oluşturma | `New-Item` |
-| **Remove** Komutları | Silme | `Remove-Item` |
-
-</div>
-
-## 🔄 Pipeline Kullanımı
-
-<div style="background-color: #f6f8fa; padding: 15px; border-radius: 5px;">
-
-```powershell
-# 🔹 Temel Pipeline
-Get-Process | Sort-Object CPU -Descending | Select-Object -First 5
-
-# 🔸 Gelişmiş Pipeline
-Get-Service | 
-    Where-Object {$_.Status -eq "Running"} | 
-    Select-Object Name, Status
-```
-
-</div>
-
-## 📊 Değişkenler ve Veri Tipleri
-
-<div align="center">
-
-| Veri Tipi | 🏷️ Tanım | 📝 Örnek |
-|-----------|---------|---------|
-| **String** | Metin | `$text = "PowerShell"` |
-| **Integer** | Tam sayı | `$num = 42` |
-| **Array** | Dizi | `$arr = @(1,2,3)` |
-| **Hashtable** | Hash tablosu | `$hash = @{Key="Value"}` |
-
-</div>
-
-## 🔧 Sistem Yönetimi
-
-<table>
-<tr>
-<th width="33%">Süreç Yönetimi</th>
-<th width="33%">Servis Yönetimi</th>
-<th width="33%">Registry</th>
-</tr>
-<tr>
-<td>
-
-```powershell
-Get-Process
-Start-Process
-Stop-Process
-```
-
-</td>
-<td>
-
-```powershell
+# Servisleri Görüntüleme
 Get-Service
-Start-Service
-Stop-Service
+
+# Prosesleri Listeleme
+Get-Process
 ```
 
-</td>
-<td>
+Cmdlet'ler, PowerShell'in temel yapı taşlarıdır ve her cmdlet genellikle bir **fiil** ve bir **isim** formatında adlandırılır (`Verb-Noun`).
+
+## Değişkenler
+
+PowerShell'de değişkenler `$` işaretiyle tanımlanır. Bir değişkeni tanımlamak ve kullanmak oldukça basittir:
 
 ```powershell
-Get-ItemProperty
-Set-ItemProperty
+# Değişken Tanımlama
+$isim = "PowerShell"
+$sayi = 10
+
+# Değişkeni Kullanma
+Write-Output $isim
+Write-Output $sayi
 ```
 
-</td>
-</tr>
-</table>
+## Nesne Tabanlı Yapı
 
-## 🌐 Ağ Yönetimi
-
-<div style="background-color: #f6f8fa; padding: 15px; border-radius: 5px;">
-
-### 📡 Temel Ağ Komutları
+PowerShell'de tüm veriler nesne tabanlıdır. Bu, çıktılarla daha fazla işlem yapılmasını sağlar. Bir komut çıktısını boru hattı (`|`) ile başka bir komuta yönlendirebilirsiniz.
 
 ```powershell
-# Ağ adaptörleri
-Get-NetAdapter
+# Servislerin adlarını filtreleme
+Get-Service | Select-Object -Property Name
 
-# IP konfigürasyonu
-Get-NetIPConfiguration
-
-# Bağlantı testi
-Test-NetConnection
+# İşlem bilgilerini filtreleme
+Get-Process | Where-Object {$_.CPU -gt 100}
 ```
 
-</div>
+## Koşullu İfadeler
 
-## 🔐 Güvenlik ve Erişim
-
-<div align="center">
-
-| 🛡️ Güvenlik Özelliği | 📝 Açıklama | ⚡ Örnek Komut |
-|---------------------|------------|--------------|
-| Execution Policy | Script çalıştırma politikası | `Set-ExecutionPolicy` |
-| Sertifikalar | Dijital imzalar | `Get-ChildItem Cert:\` |
-| Şifreleme | Veri güvenliği | `ConvertTo-SecureString` |
-
-</div>
-
-## ☁️ Azure Entegrasyonu
-
-<div style="background-color: #f6f8fa; padding: 15px; border-radius: 5px;">
+Koşullu ifadeler, işlemleri belirli koşullara göre yürütmeye olanak tanır. PowerShell'de `if`, `else` ve `elseif` kullanılır.
 
 ```powershell
-# Azure'a bağlanma
-Connect-AzAccount
-
-# Kaynak yönetimi
-Get-AzResourceGroup
-New-AzResourceGroup
+# If-Else Yapısı
+$deger = 10
+if ($deger -eq 10) {
+    Write-Output "Değer 10'a eşit"
+} elseif ($deger -gt 10) {
+    Write-Output "Değer 10'dan büyük"
+} else {
+    Write-Output "Değer 10'dan küçük"
+}
 ```
 
-</div>
+## Döngüler
 
-## 📚 Best Practices
+Döngüler tekrarlı işlemler için kullanılır. PowerShell'de `for`, `foreach`, ve `while` döngüleri kullanılabilir.
 
-<div align="center">
+```powershell
+# For Döngüsü
+for ($i = 0; $i -lt 5; $i++) {
+    Write-Output "Sayı: $i"
+}
 
-| 📌 Kategori | ✨ Öneriler |
-|------------|------------|
-| Kod Stili | - Anlamlı değişken isimleri<br>- Düzenli boşluklar<br>- Tutarlı girinti |
-| Performans | - ArrayList kullanımı<br>- Paralel işleme<br>- Memory yönetimi |
-| Güvenlik | - En az yetki prensibi<br>- Şifreli depolama<br>- Güncel modüller |
-
-</div>
-
-## 🎓 Öğrenme Yol Haritası
-
-<div align="center">
-
-```mermaid
-graph TD
-    A[Başlangıç] --> B[Temel Komutlar]
-    B --> C[Scripting]
-    C --> D[Sistem Yönetimi]
-    D --> E[Otomasyon]
-    E --> F[İleri Seviye]
-    style A fill:#ff9900
-    style B fill:#87CEEB
-    style C fill:#90EE90
-    style D fill:#FFB6C1
-    style E fill:#DDA0DD
-    style F fill:#98FB98
+# Foreach Döngüsü
+$liste = 1..5
+foreach ($sayi in $liste) {
+    Write-Output "Sayı: $sayi"
+}
 ```
 
-</div>
+## Fonksiyonlar
 
-## 🛠️ Faydalı Araçlar ve Kaynaklar
+PowerShell'de kendi fonksiyonlarınızı tanımlayabilirsiniz. Fonksiyonlar, belirli görevleri yerine getiren kod bloklarıdır.
 
-<div align="center">
+```powershell
+# Fonksiyon Tanımlama
+function Topla {
+    param ($sayi1, $sayi2)
+    return $sayi1 + $sayi2
+}
 
-| 🔧 Araç | 📝 Açıklama | 🔗 Link |
-|---------|------------|---------|
-| VS Code | Modern editör | [İndir](https://code.visualstudio.com/) |
-| PowerShell ISE | Entegre geliştirme ortamı | Windows içinde |
-| Pester | Test framework | [GitHub](https://github.com/pester/Pester) |
+# Fonksiyon Çağırma
+Topla -sayi1 5 -sayi2 10
+```
 
-</div>
+## Modüller ve Cmdlet'ler
 
--------------------
+Modüller, PowerShell'de bir grup komutu bir araya getiren bileşenlerdir. Mevcut modülleri görmek için:
 
-<div align="center">
+```powershell
+# Yüklü modülleri listele
+Get-Module -ListAvailable
 
-### 📢 Katkıda Bulunma
-Bu rehberi geliştirmek için önerilerinizi bekliyoruz!
+# Modül yükleme
+Import-Module <modül_adı>
+```
 
-### 📜 Lisans
-Bu rehber MIT lisansı altında dağıtılmaktadır.
+Örnek olarak, `Az` modülü ile Azure hizmetlerine erişebilirsiniz:
 
-</div>
+```powershell
+# Azure modülünü yükleme
+Install-Module -Name Az
+```
+
+## Hata Yönetimi
+
+PowerShell'de hataları yakalamak ve yönetmek için `Try-Catch-Finally` yapısı kullanılır.
+
+```powershell
+# Hata Yönetimi
+try {
+    # Hata oluşabilecek işlem
+    Get-Content "olmayan_dosya.txt"
+}
+catch {
+    Write-Output "Hata: $_"
+}
+finally {
+    Write-Output "İşlem tamamlandı"
+}
+```
+
+## Gelişmiş Konular
+
+### Pipeline (Boru Hattı)
+
+PowerShell'de komutlar arasında veri aktarımı yapmak için boru hattı (`|`) kullanılır.
+
+```powershell
+# Bir işlemdeki sonuçları diğerine aktarma
+Get-Process | Where-Object {$_.CPU -gt 100}
+```
+
+### Splatting
+
+Birden çok parametreyi bir cmdlet'e aktarmak için splatting kullanılabilir.
+
+```powershell
+# Splatting kullanımı
+$params = @{
+    Path = "C:\Temp"
+    Filter = "*.txt"
+    Recurse = $true
+}
+Get-ChildItem @params
+```
+
+---
+
+## Kaynaklar
+
+- [Resmi PowerShell Belgeleri](https://docs.microsoft.com/powershell/)
+- [PowerShell Gallery](https://www.powershellgallery.com/)
+- [GitHub PowerShell Reposu](https://github.com/powershell/powershell)
+
+---
+
+Bu rehber, PowerShell kullanırken size yol gösterecek temel ve gelişmiş bilgileri sunar. Daha fazla bilgi ve derinlemesine eğitimler için yukarıdaki kaynakları inceleyebilirsiniz.
+```
+
+Bu rehberi Markdown formatında `readme.md` dosyasına ekleyerek GitHub projenizde kullanabilirsiniz.
